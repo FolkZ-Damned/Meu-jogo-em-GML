@@ -1,0 +1,87 @@
+#region teclas
+
+// Variáveis boolean
+
+direita = keyboard_check(ord("D"));
+esquerda = keyboard_check(ord("A"));
+cima = keyboard_check_pressed(ord("W"));
+#endregion
+
+#region velocidade
+
+hspd = (direita - esquerda) * spd;
+
+// Gravidade
+
+if !place_meeting(x, y + 1, obj_wall){
+	vspd += grv;
+}else{
+	if cima{
+		vspd = -2.8;
+	}
+}
+#endregion
+
+#region colisão
+// Colisão horizontal
+
+if place_meeting(x + hspd, y, obj_wall){
+    while !place_meeting(x + sign(hspd), y, obj_wall){
+	    x += sign(hspd);
+	}
+	
+	hspd = 0;
+	
+}
+
+x += hspd;
+
+// Colisão vertical
+
+if place_meeting(x, y + vspd, obj_wall){
+	while !place_meeting(x, y + sign(vspd), obj_wall){
+		y += sign(vspd);
+		
+	}
+	
+	vspd = 0;
+	
+}
+
+y += vspd;
+
+#endregion
+
+#region Sprites
+
+if (hspd != 0) image_xscale = sign(hspd);
+
+if (!place_meeting(x,y+1,obj_wall))
+{
+	sprite_index = spr_player_JumpInicial;
+	if (sign(vspd) > 0.5) sprite_index = spr_player_JumpFall; else sprite_index = spr_player_JumpInicial;
+	
+}
+else
+{
+	if (hspd != 0)
+	{
+	sprite_index = spr_player_running;	
+	}
+}
+if hspd = 0 {
+if place_meeting(x,y+1,obj_wall) {	
+	sprite_index = spr_player_idle
+  }
+}
+
+if hspd != 0 {
+	if place_meeting(x,y+1,obj_wall) {
+    sprite_index = spr_player_running;
+	}
+
+
+}
+
+
+#endregion
