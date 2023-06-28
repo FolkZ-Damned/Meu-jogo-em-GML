@@ -1,0 +1,19 @@
+/// Teclas
+
+direita = 0;
+esquerda = 0;
+cima = 0;
+
+// Variáveis de velocidade // 
+
+hspd = 0;
+vspd = 0;
+spd = 3.2;
+
+// Variável de gravidade
+
+grv = 0.09
+
+// Variáveis de sprites
+
+image_speed = 0.4
